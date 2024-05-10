@@ -35,7 +35,7 @@
 <body>
 
 <div class="cabecalho" id="cabecalho">
-  Brasileirão série A
+    <p>Brasileirão série A</p>
 </div>
 
 <div class="container">

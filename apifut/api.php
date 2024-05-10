@@ -9,7 +9,7 @@
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://jsuol.com.br/c/monaco/utils/gestor/commons.js?&file=commons.uol.com.br/sistemas/esporte/modalidades/futebol/campeonatos/dados/2022/30/dados.json',
+        CURLOPT_URL => 'http://jsuol.com.br/c/monaco/utils/gestor/commons.js?&file=commons.uol.com.br/sistemas/esporte/modalidades/futebol/campeonatos/dados/2024/30/dados.json',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -26,12 +26,10 @@
     $pos = 0;
     $f = 0;
     if($comando == 'Classificacao'){
-        $array_classificacao = $array_api_fut['fases']['3453']['classificacao']['grupo']['Único'];
+        $array_classificacao = $array_api_fut['fases']['3908']['classificacao']['grupo']['Único'];
         $array_equipes = $array_api_fut['equipes'];
-        $array_pontos = $array_api_fut['fases']['3453']['classificacao']['equipe'];
+        $array_pontos = $array_api_fut['fases']['3908']['classificacao']['equipe'];
         
-       // $array_id_jogos = $array_api_fut['fases']['3453']['jogos']["rodada"][$id_rodada];
-       //
 
         foreach($array_classificacao as $value){ // id dos times ja tem no value
             $array_classificacao_final[$pos]['Nome'] = $array_equipes[$value]['nome-comum'];
@@ -46,16 +44,16 @@
             $array_classificacao_final[$pos]['sg'] = $array_pontos[$value]['sg']['total'];
             
             //dando erro array deslocada valor nulo
-            $rodadaAtual = $array_api_fut['fases']['3453']['rodada']['atual'];
+            $rodadaAtual = $array_api_fut['fases']['3908']['rodada']['atual'];
             $numRodadas = ($rodadaAtual - 4);
 
             for($i = $rodadaAtual; $i >= $numRodadas; $i--){
-                $array_jogos = $array_api_fut['fases']['3453']['jogos']['rodada'][$i];
+                $array_jogos = $array_api_fut['fases']['3908']['jogos']['rodada'][$i];
                 foreach($array_jogos as $valor){
-                    $timeUm = $array_api_fut['fases']['3453']['jogos']["id"][$valor]["time1"];
-                    $timeDois = $array_api_fut['fases']['3453']['jogos']["id"][$valor]["time2"];
-                    (int)$placarUm = $array_api_fut['fases']['3453']['jogos']["id"][$valor]["placar1"];
-                    (int)$placarDois = $array_api_fut['fases']['3453']['jogos']["id"][$valor]["placar2"];
+                    $timeUm = $array_api_fut['fases']['3908']['jogos']["id"][$valor]["time1"];
+                    $timeDois = $array_api_fut['fases']['3908']['jogos']["id"][$valor]["time2"];
+                    (int)$placarUm = $array_api_fut['fases']['3908']['jogos']["id"][$valor]["placar1"];
+                    (int)$placarDois = $array_api_fut['fases']['3908']['jogos']["id"][$valor]["placar2"];
 
                     if($timeUm == $value){
                         $vitoria = ($placarUm > $placarDois);
@@ -95,8 +93,8 @@
 
     }else if($comando == 'Rodada'){
         $id_rodada = $_GET['Rodada'];
-        $array_id_jogos = $array_api_fut['fases']['3453']['jogos']["rodada"][$id_rodada];
-        $array_jogos = $array_api_fut['fases']['3453']['jogos']['id'];
+        $array_id_jogos = $array_api_fut['fases']['3908']['jogos']["rodada"][$id_rodada];
+        $array_jogos = $array_api_fut['fases']['3908']['jogos']['id'];
         $pos = 0;
  
         foreach($array_id_jogos as $value){
